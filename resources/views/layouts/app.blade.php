@@ -21,13 +21,13 @@
                         <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sub_categories.index') }}">Sub Categories</a>
+                        <a class="nav-link" href="{{ route('sub-categories.index') }}">Sub Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products.index') }}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products-gallery.index') }}">Products Gallery</a>
+                        <a class="nav-link" href="{{ route('galleries.index') }}">Galleries</a>
                     </li>
                 </ul>
             </div>

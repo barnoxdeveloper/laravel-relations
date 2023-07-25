@@ -9,7 +9,7 @@
                     <h3>Create New Sub Category</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('sub_categories.store') }}" method="POST">
+                    <form action="{{ route('sub-categories.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="category_id">Category</label>

@@ -39,7 +39,7 @@ class SubCategoryController extends Controller
 
         SubCategory::create($request->all());
 
-        return redirect()->route('sub_categories.index')->with('success', 'SubCategory created successfully.');
+        return redirect()->route('sub-categories.index')->with('success', 'SubCategory created successfully.');
     }
 
     /**
@@ -72,7 +72,7 @@ class SubCategoryController extends Controller
 
         $subCategory->update($request->all());
 
-        return redirect()->route('sub_categories.index')->with('success', 'SubCategory updated successfully.');
+        return redirect()->route('sub-categories.index')->with('success', 'SubCategory updated successfully.');
     }
 
     /**
@@ -82,6 +82,6 @@ class SubCategoryController extends Controller
     {
         $subCategory->delete();
 
-        return redirect()->route('sub_categories.index')->with('success', 'SubCategory deleted successfully.');
+        return redirect()->route('sub-categories.index')->with('success', 'SubCategory deleted successfully.');
     }
 }

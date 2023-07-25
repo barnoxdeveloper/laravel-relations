@@ -20,6 +20,6 @@ Route::get('/', function () {
 
 
 Route::resource('categories', CategoryController::class);
-Route::resource('sub_categories', SubCategoryController::class);
+Route::resource('sub-categories', SubCategoryController::class);
 Route::resource('products', ProductController::class);
-Route::resource('products-gallery', ProductGalleryController::class);
+Route::resource('galleries', ProductGalleryController::class);

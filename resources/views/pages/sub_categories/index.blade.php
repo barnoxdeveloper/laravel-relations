@@ -9,7 +9,7 @@
                     <h3>Sub Categories</h3>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('sub_categories.create') }}" class="btn btn-primary mb-3">Create New Sub Category</a>
+                    <a href="{{ route('sub-categories.create') }}" class="btn btn-primary mb-3">Create New Sub Category</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -28,8 +28,8 @@
                                 <td>{{ $subCategory->name }}</td>
                                 <td>{{ $subCategory->status ? 'Active' : 'Inactive' }}</td>
                                 <td>
-                                    <a href="{{ route('sub_categories.edit', $subCategory->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <form action="{{ route('sub_categories.destroy', $subCategory->id) }}" method="POST" class="d-inline">
+                                    <a href="{{ route('sub-categories.edit', $subCategory->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('sub-categories.destroy', $subCategory->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this sub category?')">Delete</button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{Product, ProductGallery};
 
 class ProductGalleryController extends Controller
@@ -12,7 +13,7 @@ class ProductGalleryController extends Controller
      */
     public function index()
     {
-        $galleries = ProductGallery::all();
+        $galleries = ProductGallery::with('product')->get();
         $i = 1;
         return view('pages.galleries.index', compact('galleries', 'i'));
     }
@@ -23,7 +24,7 @@ class ProductGalleryController extends Controller
     public function create()
     {
         $products = Product::all();
-        return view('pages.galleries.index', compact('products'));
+        return view('pages.galleries.create', compact('products'));
     }
 
     /**
@@ -32,7 +33,7 @@ class ProductGalleryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sub_category_id' => 'required|exists:sub_categories,id',
+            'product_id' => 'required|exists:products,id',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|boolean',
         ]);
@@ -42,7 +43,7 @@ class ProductGalleryController extends Controller
         ProductGallery::create([
             'product_id' => $request->product_id,
             'photo' => $photoPath,
-            'status' => true, // Set the status to true by default
+            'status' => $request->status,
         ]);
 
         return redirect()->route('galleries.index')->with('success', 'Photo added to the gallery successfully.');
@@ -51,7 +52,7 @@ class ProductGalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductGallery $productGallery)
+    public function show(ProductGallery $gallery)
     {
         //
     }
@@ -59,39 +60,62 @@ class ProductGalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductGallery $productGallery)
+    public function edit(ProductGallery $gallery)
     {
-        return view('galleries.edit', compact('product', 'gallery'));
+        $products = Product::all();
+        return view('pages.galleries.edit', compact('products', 'gallery'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductGallery $productGallery)
+
+    public function update(Request $request, ProductGallery $gallery)
     {
         $request->validate([
-            'sub_category_id' => 'required|exists:sub_categories,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_id' => 'required|exists:sub_categories,id',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|boolean',
         ]);
 
+        // Store the old photo path
+        $oldPhotoPath = $gallery->photo;
+
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('gallery', 'public');
-            $productGallery->update(['photo' => $photoPath]);
+            $gallery->update(['photo' => $photoPath]);
+
+            // Delete the old photo
+            if (Storage::disk('public')->exists($oldPhotoPath)) {
+                Storage::disk('public')->delete($oldPhotoPath);
+            }
+        } else {
+            // If no new photo is uploaded, only update product_id and status
+            $gallery->update([
+                'product_id' => $request->product_id,
+                'status' => $request->status,
+            ]);
         }
 
-        // You can add additional fields to update if needed, e.g., 'status'
-
-        return redirect()->route('galleries.index', $productGallery->id)->with('success', 'Photo updated successfully.');
+        return redirect()->route('galleries.index')->with('success', 'Photo updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductGallery $productGallery)
+    public function destroy(ProductGallery $gallery)
     {
-        $productGallery->delete();
+        // Store the photo path before deleting the gallery item
+        $photoPath = $gallery->photo;
 
-        return redirect()->route('galleries.index', $productGallery->id)->with('success', 'Photo deleted from the gallery successfully.');
+        // Delete the gallery item
+        $gallery->delete();
+
+        // Delete the photo file from storage
+        if (Storage::disk('public')->exists($photoPath)) {
+            Storage::disk('public')->delete($photoPath);
+        }
+
+        return redirect()->route('galleries.index')->with('success', 'Photo deleted from the gallery successfully.');
     }
 }

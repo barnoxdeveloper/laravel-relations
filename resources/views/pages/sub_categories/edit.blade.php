@@ -9,7 +9,7 @@
                     <h3>Edit Sub Category</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('sub_categories.update', $subCategory->id) }}" method="POST">
+                    <form action="{{ route('sub-categories.update', $subCategory->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
