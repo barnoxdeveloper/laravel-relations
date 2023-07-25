@@ -5,4 +5,5 @@ How to install?
 3. In terminal : npm update
 4. Copy .env.example and rename to .env
 5. Set up the database name
-6. Done.
+6. In terminal : php artisan migrate
+7. Done.
