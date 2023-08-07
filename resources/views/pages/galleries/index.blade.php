@@ -9,7 +9,7 @@
                     <h3>Product Gallery</h3>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('galleries.create') }}" class="btn btn-primary mb-3">Create New Product</a>
+                    <a href="{{ route('galleries.create') }}" class="btn btn-primary mb-3">Add Photo Product</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $gallery->product->name }}</td>
-                                <td><img src="{{ asset('storage/' . $gallery->photo) }}" alt="Gallery Photo" class="img-fluid"></td>
+                                <td><img src="{{ asset('storage/' . $gallery->photo) }}" alt="Gallery Photo" class="img-fluid" style="width: 100px; height: 100px;"></td>
                                 <td>{{ $gallery->status ? 'Active' : 'Inactive' }}</td>
                                 <td>
                                     <a href="{{ route('galleries.edit', $gallery->id) }}" class="btn btn-primary btn-sm">Edit</a>

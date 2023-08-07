@@ -31,7 +31,7 @@
                                 <option value="0" {{ !$subCategory->status ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Sub Category</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Sub Category</button>
                     </form>
                 </div>
             </div>

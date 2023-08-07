@@ -34,7 +34,7 @@ class ProductGalleryController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'status' => 'required|boolean',
         ]);
 
@@ -74,7 +74,7 @@ class ProductGalleryController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:sub_categories,id',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'status' => 'required|boolean',
         ]);
 

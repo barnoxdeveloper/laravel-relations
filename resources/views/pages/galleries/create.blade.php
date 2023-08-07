@@ -30,7 +30,7 @@
                                 <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Upload Photo</button>
+                        <button type="submit" class="btn btn-primary mt-3">Upload Photo</button>
                     </form>
                 </div>
             </div>

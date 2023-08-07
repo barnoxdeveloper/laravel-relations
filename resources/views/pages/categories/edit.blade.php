@@ -23,7 +23,7 @@
                                 <option value="0" {{ !$category->status ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Category</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Category</button>
                     </form>
                 </div>
             </div>

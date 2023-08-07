@@ -13,7 +13,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="sub_category_id">Product</label>
+                            <label for="sub_category_id">Sub Category</label>
                             <select name="sub_category_id" id="sub_category_id" class="form-control" required>
                                 @foreach($subCategories as $item)
                                 <option value="{{ $item->id }}" {{ $product->sub_category_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
@@ -35,7 +35,7 @@
                                 <option value="0" {{ !$product->status ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Featured Product</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Featured Product</button>
                     </form>
                 </div>
             </div>

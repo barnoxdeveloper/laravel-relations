@@ -32,7 +32,7 @@
                                 <option value="0" {{ !$gallery->status ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Photo</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Photo</button>
                     </form>
                 </div>
             </div>
